@@ -10,7 +10,6 @@ import (
 */
 
 // Удалить элемент без сохранения порядка
-// (O(1) без сохранения порядка) (O(N) с сохранением порядка)
 func delSliceElement[T any](slice []T, pos int, safeOrder bool) ([]T, error) {
 	if pos < 0 || pos >= len(slice) {
 		return nil, errors.New("index out of range")

@@ -21,7 +21,7 @@ func unique(s string) bool {
 	runes := []rune(strings.ToLower(s))
 
 	//символы
-	runesSet := make(map[rune]bool)
+	runesSet := make(map[rune]struct{})
 
 	//Добовляем руны в карту
 	for _, ch := range runes {
@@ -29,7 +29,7 @@ func unique(s string) bool {
 		if _, ok := runesSet[ch]; ok {
 			return false
 		}
-		runesSet[ch] = true
+		runesSet[ch] = struct{}{}
 	}
 
 	return true

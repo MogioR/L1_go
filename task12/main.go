@@ -9,12 +9,12 @@ import "fmt"
 
 func main() {
 	words := []string{"cat", "cat", "dog", "cat", "tree"}
-	wordsSet := make(map[string]bool)
+	wordsSet := make(map[string]struct{})
 
 	// Если слово не в множестве, то добовляем
 	for _, word := range words {
-		if !wordsSet[word] {
-			wordsSet[word] = true
+		if _, ok := wordsSet[word]; !ok {
+			wordsSet[word] = struct{}{}
 		}
 	}
 
