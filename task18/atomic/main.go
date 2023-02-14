@@ -3,29 +3,27 @@ package main
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 )
 
 /*
 	Реализовать структуру-счетчик, которая будет инкрементироватьс
 	я в конкурентной среде. По завершению программа должна
 	выводить итоговое значение счетчика.
+
+	Метод Sync Atomic
 */
 
 type Counter struct {
-	data  int32
-	mutex sync.RWMutex
+	data int32
 }
 
 func (c *Counter) Get() int32 {
-	c.mutex.RLock()
-	defer c.mutex.RUnlock()
-	return c.data
+	return atomic.LoadInt32(&c.data)
 }
 
 func (c *Counter) Add() {
-	c.mutex.Lock()
-	c.data += 1
-	c.mutex.Unlock()
+	atomic.AddInt32(&c.data, 1)
 }
 
 func main() {
